@@ -4,20 +4,22 @@ var router = express.Router();
 
 const prisma = new PrismaClient()
 
-/* GET users listing. */
+/* GET hotels listing. */
 router.get('/', async function(req, res, next) {
-  const users = await prisma.user.findMany()
-  res.send(users);
+  const hotels = await prisma.hotel.findMany()
+  res.send(hotels);
 });
 
 router.post('/', async function(req, res, next) {
-  const user = await prisma.user.create({
+  const hotel = await prisma.hotel.create({
     data: {
       email: 'admin@gmail.com',
-      password: 'Admin@123'
+      name: 'Hotel 1',
+      address: 'Address 1',
+      mobile: 123456789
     }
   })
-  res.send(user);
+  res.send(hotel);
 })
 
 module.exports = router;

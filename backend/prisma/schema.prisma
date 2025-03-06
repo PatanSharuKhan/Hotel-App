@@ -18,3 +18,11 @@ model User {
   email String @unique
   password String?
 }
+
+model Hotel {
+  id Int @id @default(autoincrement())
+  name String @unique
+  email String
+  address String?
+  mobile Int
+}
