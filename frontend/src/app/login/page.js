@@ -7,6 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 	const [users, setUsers] = useState([])
+	const [error, setError] = useState("")
 
   useEffect(() => {
     if (localStorage.getItem("authToken") !== null) {
@@ -22,6 +23,7 @@ const Login = () => {
   }, [])
 
   const handleInputChange = (e) => {
+		setError("")
     if (e.target.name === "email") {
       setEmail(e.target.value)
     } else {
@@ -32,34 +34,38 @@ const Login = () => {
 	const handleFormData = (e) => {
 		e.preventDefault()
 		if (users.length > 0) {
-			users.map((user) => {
+			for(let user of users) {
 				if (user.email === email) {
 					if (bcrypt.compareSync(password, user.password)) {
 						localStorage.setItem("authToken", "jwtoken")
 						window.location.replace("/dashboard")
+						break
 					}else{
-						alert("Incorrect password")
+						setError("Incorrect password")
+						break
 					}
 				}else{
-					alert("Email does not exist")
+					setError("Email does not exist")
 				}
-			})
+			}
 		}else{
-			alert("Server Error / No registered users - Try again later")
+			setError("Server Error / No registered users - Try again later")
 		}
 	}
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="h-[100vh] flex flex-col justify-center text-center">
+      <h1 className="mb-5 text-2xl">HOTEL APP</h1>
       <form
         onSubmit={handleFormData}
+				className="flex flex-col w-[50%] lg:w-[30%] mx-auto"
       >
         <input
           type="text"
           placeholder="Email"
           name="email"
           onChange={handleInputChange}
+					className="mb-4 border p-2 rounded border-gray-500"
 					required
         />
         <input
@@ -68,8 +74,10 @@ const Login = () => {
           name="password"
           onChange={handleInputChange}
 					required
+					className="mb-4 border p-2 rounded border-gray-500"
         />
-        <button type="submit">Login</button>
+				<p className="text-red-500 text-sm mb-2">{error}</p>
+        <button type="submit" className="border rounded p-2 w-[50%] mx-auto bg-gray-800 cursor-pointer">Login</button>
       </form>
     </div>
   )
