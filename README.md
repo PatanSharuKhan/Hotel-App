@@ -26,3 +26,8 @@ a hotel. Once he books the hotel he can do a web check-in by providing aadhaar n
 - Node
 - Postgresql
 - Prisma ORM
+
+# Notes
+- Fetch the json file [hotels], store them in local storage, make crud operations. Use the local storage for crud operations.
+- If some thing went wrong fetch the json file and update the local storage.
+- Name the hotels as (hotels), booked as (booked)

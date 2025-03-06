@@ -3,12 +3,12 @@
         {
             "id": 1,
             "email": "admin@gmail.com",
-            "password": "admin@123"
+            "password": "$2a$12$5HbnM4cB5sJhZUUtp2TWCOYyH.8ElI/xs2FA9bVdBfSj8YPJVZj4C"
         },
         {
             "id": 2,
             "email": "user@gmail.com",
-            "password": "user@123"
+            "password": "$2a$12$YQFOwiZ.o3sN.YKzTNH9fOov2cy5HSrsDARUUyJhzdoo92AF8h2j."
         }
     ]
 }
