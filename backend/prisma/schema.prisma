@@ -14,15 +14,36 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  email String @unique
-  password String?
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  hotels   Book[]
 }
 
 model Hotel {
-  id Int @id @default(autoincrement())
-  name String @unique
-  email String
+  id      Int     @id @default(autoincrement())
+  name    String  @unique
+  email   String
   address String?
-  mobile Int
+  mobile  Int
+  users   Book[]
+}
+
+model UserAadhaar {
+  id            Int    @id
+  name          String
+  aadhaarNumber Int    @unique
+  Book          Book?  @relation(fields: [bookUserId, bookHotelId], references: [userId, hotelId])
+  bookUserId    Int?
+  bookHotelId   Int?
+}
+
+model Book {
+  user         User          @relation(fields: [userId], references: [id])
+  userId       Int
+  hotel        Hotel         @relation(fields: [hotelId], references: [id])
+  hotelId      Int
+  userAadhaars UserAadhaar[]
+
+  @@id([userId, hotelId])
 }
